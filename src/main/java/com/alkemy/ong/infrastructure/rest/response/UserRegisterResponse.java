@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 public class UserRegisterResponse {
 
+  private Long id;
+
   private String firstName;
 
   private String lastName;
@@ -16,5 +18,7 @@ public class UserRegisterResponse {
   private String email;
 
   private String password;
+
+  private String imageUrl;
 
 }
