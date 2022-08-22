@@ -30,5 +30,5 @@ public class DefaultExceptionHandler {
   private LoginErrorResponse buildError(HttpStatus httpStatus, String message, String moreInfo) {
     return buildError(httpStatus, message, List.of(moreInfo));
   }
-  
+
 }
