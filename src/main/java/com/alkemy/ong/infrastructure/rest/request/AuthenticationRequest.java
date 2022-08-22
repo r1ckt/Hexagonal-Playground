@@ -4,13 +4,15 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
-public class UserRegisterRequest {
+public class AuthenticationRequest {
 
   @NotNull(message = "Name cannot be null")
   private String firstName;
