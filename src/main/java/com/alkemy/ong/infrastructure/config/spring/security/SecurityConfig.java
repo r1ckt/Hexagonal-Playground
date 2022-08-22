@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,12 +30,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(AuthenticationManagerBuilder managerBuilder) throws Exception {
-
+    managerBuilder.userDetailsService(userDetailsService)
+        .passwordEncoder(passwordEncoder);
   }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests().anyRequest().permitAll();
+
+    //http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
   }
 
   @Bean
@@ -47,12 +51,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     return new CustomAuthenticationEntryPoint();
   }
 
-  //http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-  /*
   @Override
   @Bean
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
-*/
+
+
+
+
 }
