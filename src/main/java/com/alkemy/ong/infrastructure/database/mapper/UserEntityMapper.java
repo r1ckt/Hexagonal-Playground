@@ -9,6 +9,7 @@ public class UserEntityMapper {
 
   @Autowired
   private JwtUtils jwtUtils;
+
   public User toDomain(UserEntity userEntity) {
     if (userEntity == null) {
       return null;

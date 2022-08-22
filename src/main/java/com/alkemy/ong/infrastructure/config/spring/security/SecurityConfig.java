@@ -33,9 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(AuthenticationManagerBuilder managerBuilder) throws Exception {
-    managerBuilder.
-        userDetailsService(userDetailsService).
-        passwordEncoder(passwordEncoder);
+    managerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
   }
 
   @Override
@@ -49,18 +47,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .authorizeRequests()
         .antMatchers(HttpMethod.POST, "/auth/register", "/auth/login")
-        .permitAll();
-        //.anyRequest()
-        //.authenticated()
-        //.and()
-        //.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-        //.exceptionHandling()
-        //.accessDeniedHandler(accessDeniedHandler())
-        //.authenticationEntryPoint(authenticationEntryPoint());
+        .permitAll()
+        .anyRequest()
+        .authenticated()
+        .and()
+        .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class)
+        .exceptionHandling()
+        .accessDeniedHandler(accessDeniedHandler())
+        .authenticationEntryPoint(authenticationEntryPoint());
   }
 
-    @Bean
-    public AccessDeniedHandler accessDeniedHandler() {
+  @Bean
+  public AccessDeniedHandler accessDeniedHandler() {
     return new CustomAccessDeniedHandler();
   }
 
@@ -74,8 +72,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
-
-
-
 
 }

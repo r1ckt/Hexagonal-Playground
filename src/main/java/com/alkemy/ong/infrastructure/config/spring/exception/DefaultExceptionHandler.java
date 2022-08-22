@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class DefaultExceptionHandler {
   private static final String INVALID_INPUT_DATA = "Invalid input data.";
+
   @ExceptionHandler(value = UserAlreadyExistsException.class)
-  protected ResponseEntity<LoginErrorResponse> handleUserAlreadyExists(UserAlreadyExistsException e) {
+  protected ResponseEntity<LoginErrorResponse> handleUserAlreadyExists(
+      UserAlreadyExistsException e
+  ) {
     LoginErrorResponse  errorResponse =
         buildError(
             HttpStatus.BAD_REQUEST, INVALID_INPUT_DATA, e.getMessage()
@@ -20,13 +23,16 @@ public class DefaultExceptionHandler {
     return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
   }
 
-  private LoginErrorResponse buildError(HttpStatus httpStatus, String message, List<String> moreInfo) {
+  private LoginErrorResponse buildError(
+      HttpStatus httpStatus, String message, List<String> moreInfo
+  ) {
     return LoginErrorResponse.builder()
         .statusCode(httpStatus.value())
         .message(message)
         .moreInfo(moreInfo)
         .build();
   }
+
   private LoginErrorResponse buildError(HttpStatus httpStatus, String message, String moreInfo) {
     return buildError(httpStatus, message, List.of(moreInfo));
   }

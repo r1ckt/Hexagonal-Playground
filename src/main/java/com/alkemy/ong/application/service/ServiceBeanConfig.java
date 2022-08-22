@@ -7,14 +7,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ServiceBeanConfig {
-
-/* login stuff
-@Bean
+  /* login stuff
+  @Bean
   public ILoginUseCase authenticationService(AuthenticationManager authenticationManager,
       UserRepository userRepository) {
     return new AuthenticationService(authenticationManager, userRepository);
   }
- */
+  */
 
   @Bean
   public ICreateUserUseCase createUserService(UserRepository userRepository) {

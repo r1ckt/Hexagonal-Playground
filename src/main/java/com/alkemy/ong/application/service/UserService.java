@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserService implements ICreateUserUseCase {
   private final IUserRepository userRepository;
+
   @Override
   public User add(User user) {
     if (userRepository.findByEmail(user.getEmail()) != null) {
