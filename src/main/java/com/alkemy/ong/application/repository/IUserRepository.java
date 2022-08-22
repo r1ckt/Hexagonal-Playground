@@ -1,5 +1,8 @@
 package com.alkemy.ong.application.repository;
 
-public interface IUserRepository {
+import com.alkemy.ong.domain.User;
 
+public interface IUserRepository {
+  User add(User user);
+  User findByEmail(String email);
 }
