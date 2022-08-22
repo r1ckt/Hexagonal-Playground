@@ -4,6 +4,5 @@ import com.alkemy.ong.domain.User;
 
 public interface ICreateUserUseCase {
 
-  User addUser(User user);
-
+  User add(User user);
 }
